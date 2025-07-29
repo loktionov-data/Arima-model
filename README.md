@@ -6,7 +6,7 @@ This project focuses on time series forecasting using **ARIMA models**. It uses 
 
 ---
 
-> ⚠️ This version improves upon previous work by introducing deeper model tuning (based on AIC/BIC), `ARIMA(4,0,3)` and `ARIMA(4,1,3)` variants, and clearer diagnostics. <
+> ⚠️ This version improves upon previous work by introducing deeper model tuning (based on AIC/BIC), `ARIMA(4,0,3)` and `ARIMA(4,1,3)` variants, and clearer diagnostics.
 
 ---
 
