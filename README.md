@@ -1,27 +1,81 @@
-# Arima-model
+# ARIMA Forecasting Model  
+**Time Series Forecasting of Monthly Airline Passengers**
 
-## Overview
-This project explores time series forecasting using the **ARIMA (AutoRegressive Integrated Moving Average)** model on the popular **AirPassengers dataset**. The dataset consists of monthly airline passenger numbers from 1949 to 1960, making it a classic dataset for time series analysis.
+## Overview  
+This project focuses on time series forecasting using **ARIMA models**. It uses the classic "AirPassengers" dataset, representing monthly totals of international airline passengers from 1949 to 1960. The project explores stationarity, builds multiple ARIMA models, visualizes results, and selects the best configuration based on statistical criteria.
 
-## Key Features
-1. **Dataset**:
-   - **Source**: [Kaggle - AirPassengers Dataset](https://www.kaggle.com/datasets/georgerocha/airpassengers).
-   - Contains monthly totals of international airline passengers (in thousands).
-   - Covers the time period: **January 1949 – December 1960**.
-2.**ARIMA Modeling**:
-   - Data preprocessing and visualization.
-   - Stationarity testing using the Augmented Dickey-Fuller (ADF) test.
-   - Model selection and parameter tuning using auto_arima function from pdmarima library.
-   - Forecasting future values using the ARIMA model.
-3. **Visualization**:
-   - Time series plots of the original data.
-   - Predicted vs. actual values visualization.
+---
+
+> ⚠️ This version improves upon previous work by introducing deeper model tuning (based on AIC/BIC), `ARIMA(4,0,3)` and `ARIMA(4,1,3)` variants, and clearer diagnostics.
+
+---
+
+## Project Workflow
+
+1. **Data Preparation**
+   - Import and inspect time series.
+   - Apply log transform and `cumsum` for better stationarity.
+  
+2. **Stationarity Testing**
+   - Augmented Dickey-Fuller test.
+   - Visual inspection using rolling statistics.
+
+3. **Differencing**
+   - First-order and cumulative differencing applied.
+   - Used to stabilize variance and trend.
+
+4. **ACF & PACF Analysis**
+   - Plots used for initial p/q estimation.
+   - Though early signs suggested low-order AR/MA terms, deeper search found `ARIMA(4,0,3)` and `ARIMA(4,1,3)` to perform better.
+
+5. **Model Selection**
+   - Fit multiple ARIMA models.
+   - Use AIC/BIC to compare and choose the optimal configuration.
+
+6. **Forecasting**
+   - Forecast future passenger volumes.
+   - Visualize actual vs predicted values with confidence intervals.
+
+---
+
+## Visualizations
+
+- Time series plot (original, log-transformed, differenced)
+- ADF test summary
+- ACF & PACF plots  
+- ARIMA forecast vs actual
+
+---
+
+## Model Insights
+
+- The best-performing models based on **AIC/BIC** were:
+  - `ARIMA(4,0,3)`
+  - `ARIMA(4,1,3)` (after `cumsum`)
+- Despite PACF/ACF suggesting lower lags, full model tuning revealed these models to be more accurate.
+- These models successfully captured both trend and noise in the data, producing realistic forecasts.
+
 ---
 
 ## Technologies Used
-- **Python** for data analysis and modeling.
-- **Jupyter Notebook** for documenting and organizing the work.
-- **Libraries**:
-  - `pandas` and `numpy` for data manipulation.
-  - `matplotlib`  for visualizations.
-  - `statsmodels` and `pmdarima` for ARIMA modeling.
+
+- **Python** (Jupyter Notebook)  
+- **Libraries**:  
+  - `pandas`, `numpy` – data handling  
+  - `matplotlib`, `seaborn` – visualization  
+  - `statsmodels` – ARIMA modeling and statistical tests
+
+---
+
+## Dataset
+
+- **Source**: [AirPassengers dataset](https://datamarket.com/data/set/22u3/monthly-airline-passenger-numbers-in-1000s-jan-49-dec-60)  
+- **Description**: Monthly totals of international airline passengers from 1949 to 1960.
+
+---
+
+## Key Takeaways
+
+- ACF/PACF are useful guides but not final arbiters of model choice.
+- Full model selection should involve **grid search** and **AIC/BIC comparison**.
+- Forecasting performance depends on both good preprocessing and proper model tuning.
